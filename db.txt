@@ -1,0 +1,16 @@
+CONFERE O STATUS DO MYSQL:
+
+service mysql status
+
+PÁRA O SERVIDOR:
+
+sudo service mysql stop
+
+INICIA O SERVIDOR:
+
+sudo service mysql start
+
+CONFIGURAÇÃO:
+
+sudo mysql_secure_installation
+

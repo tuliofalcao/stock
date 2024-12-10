@@ -3,10 +3,10 @@ from tkinter import ttk
 from tkinter import messagebox
 import tkinter
 import random
-import pymysql
+import pymysql # type: ignore
 import csv
 from datetime import datetime
-import numpy as np
+import numpy as np # type: ignore
 
 window = tkinter.Tk()
 window.title("Sistema de Gerenciamento de Estoque")
@@ -14,8 +14,19 @@ window.geometry("720x640")
 my_tree = ttk.Treeview(window, show='headings', height=20)
 style=ttk.Style()
 
-
 placeholderArray = ['','','','','']
+
+def connection():
+    conn=pymysql.connect(
+        host='localhost',
+        user='root',
+        password='',
+        db='stock'
+    )
+    return conn
+
+conn=connection()
+cursor=conn.cursor()
 
 for i in range(0,5):
     placeholderArray[i]=tkinter.StringVar()
