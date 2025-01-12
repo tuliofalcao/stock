@@ -3,10 +3,10 @@ from tkinter import ttk
 from tkinter import messagebox
 import tkinter
 import random
-import pymysql # type: ignore
+import pymysql
 import csv
 from datetime import datetime
-import numpy as np # type: ignore
+import numpy as np 
 
 window = tkinter.Tk()
 window.title("Sistema de Gerenciamento de Estoque")
@@ -31,19 +31,19 @@ cursor=conn.cursor()
 for i in range(0,5):
     placeholderArray[i]=tkinter.StringVar()
     
-dummydata = [
-    ['123123','123sd','123sd','123sd','123sd','123sd'],
-    ['123133','123sd','123sd','123sd','123sd','123sd'],
-    ['1231253','123sd','123sd','123sd','123sd','123sd'],
-    ['1231273','123sd','123sd','123sd','123sd','123sd'],
-    ['12315623','123sd','123sd','123sd','123sd','123sd'],
-    ['12312753','123sd','123sd','123sd','123sd','123sd'],
-]
+def read():
+    cursor.connection.ping()
+    sql=f"SELECT `id`, `id_item`, `nome`, `preco`, `quantidade`, `categoria`, `data` FROM stock ORDER BY `id` DESC"
+    cursor.execute(sql)
+    results=cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return results
 
 def refreshTable():
     for data in my_tree.get_children():
         my_tree.delete(data)
-    for array in dummydata:
+    for array in read():
         my_tree.insert(parent='', index='end', iid=array, text="", values=(array), tag="orow")
     my_tree.tag_configure('orow', background="#EEEEEE")
     my_tree.pack()
